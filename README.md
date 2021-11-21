@@ -14,7 +14,7 @@
 - [Code Contributions](#code-contributions)
 - [Using JFrog CLI](#using-jfrog-cli)
 - [JFrog CLI Plugins](#jfrog-cli-plugins)
-- [Release Notes](#release-notes)
+- [Release Notes](#release-notes). 
 
 # Overview
 
