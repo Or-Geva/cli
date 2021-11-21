@@ -9,6 +9,9 @@ on:
   # Triggers the workflow on labeled PRs only.
   pull_request_target:
     types: [labeled]
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
 jobs:
   CLI-Tests:
     if: contains(github.event.pull_request.labels.*.name, 'safe to test') || github.event_name == 'push'
