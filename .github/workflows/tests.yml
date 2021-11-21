@@ -12,6 +12,7 @@ on:
 concurrency:
   group: ${{ github.event.pull_request.number }}
   cancel-in-progress: true
+  if: ${{ github.event.pull_request.* }}
 jobs:
   CLI-Tests:
     if: contains(github.event.pull_request.labels.*.name, 'safe to test') || github.event_name == 'push'
