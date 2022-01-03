@@ -165,6 +165,8 @@ func TestRunPushFatManifestImage(t *testing.T) {
 	// Setup test env.
 	workspace, err := filepath.Abs(tests.Out)
 	assert.NoError(t, err)
+	assert.NoError(t, fileutils.CreateDirIfNotExist(workspace))
+
 	// Build the builder image locally.
 	builderImageName, err = inttestutils.BuildTestImage(builderImageName, "Dockerfile.Buildx.Fatmanifest", container.DockerClient)
 	assert.NoError(t, err)
