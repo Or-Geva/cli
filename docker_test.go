@@ -10,8 +10,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jfrog/jfrog-cli-core/v2/xray/commands/scan"
-
 	"github.com/jfrog/build-info-go/entities"
 	buildinfo "github.com/jfrog/build-info-go/entities"
 
@@ -454,24 +452,24 @@ func runKaniko(t *testing.T, imageToPush, kanikoImage string) string {
 	return filepath.Join(workspace, imageNameWithDigestFile)
 }
 
-func TestXrayDockerScan(t *testing.T) {
-	initContainerTest(t)
-	initXrayCli()
-	validateXrayVersion(t, scan.DockerScanMinXrayVersion)
+// func TestXrayDockerScan(t *testing.T) {
+// 	initContainerTest(t)
+// 	initXrayCli()
+// 	validateXrayVersion(t, scan.DockerScanMinXrayVersion)
 
-	// Pull alpine image from docker repo
-	imageTag := path.Join(*tests.DockerRepoDomain, tests.DockerScanTestImage)
-	dockerPullCommand := corecontainer.NewPullCommand(container.DockerClient)
-	dockerPullCommand.SetImageTag(imageTag).SetRepo(*tests.DockerVirtualRepo).SetServerDetails(serverDetails).SetBuildConfiguration(new(utils.BuildConfiguration))
-	assert.NoError(t, dockerPullCommand.Run())
+// 	// Pull alpine image from docker repo
+// 	imageTag := path.Join(*tests.DockerRepoDomain, tests.DockerScanTestImage)
+// 	dockerPullCommand := corecontainer.NewPullCommand(container.DockerClient)
+// 	dockerPullCommand.SetImageTag(imageTag).SetRepo(*tests.DockerVirtualRepo).SetServerDetails(serverDetails).SetBuildConfiguration(new(utils.BuildConfiguration))
+// 	assert.NoError(t, dockerPullCommand.Run())
 
-	// Run docker scan on alpine image
-	output := xrayCli.RunCliCmdWithOutput(t, container.DockerClient.String(), "scan", tests.DockerScanTestImage)
-	verifyScanResults(t, output, 0, 1, 1)
+// 	// Run docker scan on alpine image
+// 	output := xrayCli.RunCliCmdWithOutput(t, container.DockerClient.String(), "scan", tests.DockerScanTestImage)
+// 	verifyScanResults(t, output, 0, 1, 1)
 
-	// Delete alpine image
-	inttestutils.DeleteTestImage(t, imageTag, container.DockerClient)
-}
+// 	// Delete alpine image
+// 	inttestutils.DeleteTestImage(t, imageTag, container.DockerClient)
+// }
 
 func getExpectedFatManifestBuildInfo(t *testing.T) entities.BuildInfo {
 	testDir := tests.GetTestResourcesPath()
