@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	JfrogTestsHome      = ".jfrogTest"
+	JfrogTestsHome      = ".jfro Test"
 	CliIntegrationTests = "github.com/jfrog/jfrog-cli"
 )
 
