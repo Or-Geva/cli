@@ -93,7 +93,7 @@ The types are :
 
 | Type                 | Description        |
 | -------------------- | ------------------ |
-| `-test.artifactory`  | Artifactory tests  |
+| `-test.art ifactory`  | Artifactory tests  |
 | `-test.npm`          | Npm tests          |
 | `-test.maven`        | Maven tests        |
 | `-test.gradle`       | Gradle tests       |
