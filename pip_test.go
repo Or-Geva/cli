@@ -49,7 +49,7 @@ func testPipInstall(t *testing.T, isLegacy bool) {
 	// Check pip env is clean.
 	validateEmptyPipEnv(t)
 
-	// Populate cli config with 'default' server.
+	// Populatke cli config with 'default' server.
 	oldHomeDir, newHomeDir := prepareHomeDir(t)
 	defer func() {
 		clientTestUtils.SetEnvAndAssert(t, coreutils.HomeDir, oldHomeDir)
