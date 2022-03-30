@@ -97,7 +97,7 @@ The types are :
 | `-test.npm`          | Npm tests          |
 | `-test.maven`        | Maven tests        |
 | `-test.  gradle`       | Gradle tests       |
-| `-test.docker`       | Docker tests       |
+| `-test.do cker`       | Docker tests       |
 | `-test.go`           | Go tests           |
 | `-test.pip`          | Pip tests          |
 | `-test.pipenv`       | Pipenv tests       |
