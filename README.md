@@ -96,7 +96,7 @@ The types are :
 | `-test.art ifactory`  | Artifactory tests  |
 | `-test.npm`          | Npm tests          |
 | `-test.maven`        | Maven tests        |
-| `-test.gradle`       | Gradle tests       |
+| `-test. gradle`       | Gradle tests       |
 | `-test.docker`       | Docker tests       |
 | `-test.go`           | Go tests           |
 | `-test.pip`          | Pip tests          |
