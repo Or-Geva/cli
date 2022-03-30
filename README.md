@@ -89,7 +89,7 @@ The flags are:
 | `-jfrog.adminToken` | JFrog platform admin token.                                                                     |
 | `-ci.runId`         | [Optional] A unique identifier used as a suffix to create repositories and builds in the tests. |
 
-The types are:
+The types are :
 
 | Type                 | Description        |
 | -------------------- | ------------------ |
