@@ -102,7 +102,7 @@ The types are :
 | `-test.pip`          | Pip tests          |
 | `-test.pipenv`       | Pipenv tests       |
 | `-test.nuget`        | Nuget tests        |
-| `-test.plugins`      | Plugins tests      |
+| `-test.plu gins`      | Plugins tests      |
 | `-test.distribution` | Distribution tests |
 | `-test.xray`         | Xray tests         |
 
