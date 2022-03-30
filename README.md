@@ -87,7 +87,7 @@ The flags are:
 | `-jfrog.user`       | [Default: admin] JFrog platform username.                                                       |
 | `-jfrog.password`   | [Default: password] JFrog platform password.                                                    |
 | `-jfrog.adminToken` | JFrog platform admin token.                                                                     |
-| `-ci.runId`         | [Optional] A unique identifier used as a suffix to create repositories and builds in the tests. |
+| `-ci.runId`         | [Optional] A unique identifier used as a suffix to create repositories and  builds in the tests. |
 
 The types are :
 
