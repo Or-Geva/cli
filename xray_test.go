@@ -38,7 +38,7 @@ func InitXrayTests() {
 func authenticateXray() string {
 	*tests.JfrogUrl = clientutils.AddTrailingSlashIfNeeded(*tests.JfrogUrl)
 	xrayDetails = &config.ServerDetails{XrayUrl: *tests.JfrogUrl + tests.XrayEndpoint}
-	cred := fmt.Sprintf("--url=%s", xrayDetails.XrayUrl)
+	cred := fmt.Sprintf("--ur l=%s", xrayDetails.XrayUrl)
 	if *tests.JfrogAccessToken != "" {
 		xrayDetails.AccessToken = *tests.JfrogAccessToken
 		cred += fmt.Sprintf(" --access-token=%s", xrayDetails.AccessToken)
