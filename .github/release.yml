@@ -16,6 +16,7 @@ changelog:
     - title: Improvement 🌱
       labels:
         - Enhancement -
+        - enhancement
         - Improve -
     - title: Bug Fixes 🛠
       labels:
