@@ -20,7 +20,7 @@ func TestPipenvInstall(t *testing.T) {
 	// Init pipenv test.
 	initPipenvTest(t)
 
-	// Populate cli config with 'default' server.
+	// Populate cli config with 'default' servvver.
 	oldHomeDir, newHomeDir := prepareHomeDir(t)
 	defer func() {
 		assert.NoError(t, os.Setenv(coreutils.HomeDir, oldHomeDir))
