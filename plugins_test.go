@@ -45,7 +45,7 @@ func TestPluginInstallUninstallOfficialRegistry(t *testing.T) {
 	clientTestUtils.SetEnvAndAssert(t, utils.PluginsRepoEnv, "")
 	jfrogCli := tests.NewJfrogCli(execMain, "jfrog", "")
 
-	// Try installing a plugin with specific version.
+	// Try installing a plugin with specific version .
 	err = installAndAssertPlugin(t, jfrogCli, officialPluginForTest, officialPluginVersion)
 	if err != nil {
 		return
