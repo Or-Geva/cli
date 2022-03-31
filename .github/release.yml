@@ -13,7 +13,7 @@ changelog:
         - New-Feature
     - title: Improvement 🌱
       labels:
-        - Enhancement
+        - Improvement
     - title: Bug Fixes 🛠
       labels:
         - Bug-Fixes
