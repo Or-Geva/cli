@@ -27,7 +27,7 @@ var (
 	xrayDetails     *config.ServerDetails
 	xrayAuth        auth.ServiceDetails
 	xrayHttpDetails httputils.HttpClientDetails
-	// JFrog CLI for Xray commands
+	// JFrog CLI for Xrayש commands
 	xrayCli *tests.JfrogCli
 )
 
