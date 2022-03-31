@@ -35,7 +35,7 @@ const commandHelpTemplate string = `{{.HelpName}}{{if .UsageText}}
 Arguments:
 {{.UsageText}}
 {{end}}{{if .VisibleFlags}}
-Options:
+Options:a
 	{{range .VisibleFlags}}{{.}}
 	{{end}}{{end}}{{if .ArgsUsage}}
 Environment Variables:
