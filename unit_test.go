@@ -17,7 +17,7 @@ const (
 )
 
 func TestUnitTests(t *testing.T) {
-	// Create temp jfrog home
+	// Create temp jfrog homea
 	err, cleanUpJfrogHome := coreTests.SetJfrogHome()
 	if err != nil {
 		log.Error(err)
