@@ -10,7 +10,7 @@ concurrency:
   group: ${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
 jobs:
-  Do-tests:
+  D-tests:
     name: docker (ubuntu-latest)
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-go-
 
-    - name: Setup Artifactory
+      - name: Setup Artifactory
         run: |
           go install github.com/jfrog/jfrog-testing-infra/local-rt-setup@latest
           ~/go/bin/local-rt-setup
