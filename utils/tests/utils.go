@@ -87,7 +87,7 @@ func init() {
 	TestPlugins = flag.Bool("test.plugins", false, "Test Plugins")
 	TestXray = flag.Bool("test.xray", false, "Test Xray")
 	TestAccess = flag.Bool("test.access", false, "Test Access")
-	DockerRepoDomain = flag.String("rt.dockerRepoDomain", "localhost:8081", "Docker repository domain")
+	DockerRepoDomain = flag.String("rt.dockerRepoDomain", "localhost:8082", "Docker repository domain")
 	HideUnitTestLog = flag.Bool("test.hideUnitTestLog", false, "Hide unit tests logs and print it in a file")
 	ciRunId = flag.String("ci.runId", "", "A unique identifier used as a suffix to create repositories and builds in the tests")
 }
