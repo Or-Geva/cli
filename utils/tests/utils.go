@@ -60,10 +60,6 @@ var (
 	TestXray               *bool
 	TestAccess             *bool
 	DockerRepoDomain       *string
-	DockerVirtualRepo      *string
-	DockerRemoteRepo       *string
-	DockerLocalRepo        *string
-	DockerPromoteLocalRepo *string
 	HideUnitTestLog        *bool
 	ciRunId                *string
 	timestampAdded         bool
@@ -91,11 +87,7 @@ func init() {
 	TestPlugins = flag.Bool("test.plugins", false, "Test Plugins")
 	TestXray = flag.Bool("test.xray", false, "Test Xray")
 	TestAccess = flag.Bool("test.access", false, "Test Access")
-	DockerRepoDomain = flag.String("rt.dockerRepoDomain", "", "Docker repository domain")
-	DockerVirtualRepo = flag.String("rt.dockerVirtualRepo", "", "Docker virtual repo")
-	DockerRemoteRepo = flag.String("rt.dockerRemoteRepo", "", "Docker remote repo")
-	DockerLocalRepo = flag.String("rt.dockerLocalRepo", "", "Docker local repo")
-	DockerPromoteLocalRepo = flag.String("rt.dockerPromoteLocalRepo", "", "Docker promote local repo")
+	DockerRepoDomain = flag.String("rt.dockerRepoDomain", "localhost:8082", "Docker repository domain")
 	HideUnitTestLog = flag.Bool("test.hideUnitTestLog", false, "Hide unit tests logs and print it in a file")
 	ciRunId = flag.String("ci.runId", "", "A unique identifier used as a suffix to create repositories and builds in the tests")
 }
@@ -313,29 +305,33 @@ func GetBuildInfo(serverDetails *config.ServerDetails, buildName, buildNumber st
 }
 
 var reposConfigMap = map[*string]string{
-	&DistRepo1:         DistributionRepoConfig1,
-	&DistRepo2:         DistributionRepoConfig2,
-	&GoRepo:            GoLocalRepositoryConfig,
-	&GoRemoteRepo:      GoRemoteRepositoryConfig,
-	&GoVirtualRepo:     GoVirtualRepositoryConfig,
-	&GradleRepo:        GradleRepositoryConfig,
-	&MvnRepo1:          MavenRepositoryConfig1,
-	&MvnRepo2:          MavenRepositoryConfig2,
-	&MvnRemoteRepo:     MavenRemoteRepositoryConfig,
-	&GradleRemoteRepo:  GradleRemoteRepositoryConfig,
-	&NpmRepo:           NpmLocalRepositoryConfig,
-	&NpmRemoteRepo:     NpmRemoteRepositoryConfig,
-	&NugetRemoteRepo:   NugetRemoteRepositoryConfig,
-	&PypiRemoteRepo:    PypiRemoteRepositoryConfig,
-	&PypiVirtualRepo:   PypiVirtualRepositoryConfig,
-	&PipenvRemoteRepo:  PipenvRemoteRepositoryConfig,
-	&PipenvVirtualRepo: PipenvVirtualRepositoryConfig,
-	&RtDebianRepo:      DebianTestRepositoryConfig,
-	&RtLfsRepo:         GitLfsTestRepositoryConfig,
-	&RtRepo1:           Repo1RepositoryConfig,
-	&RtRepo2:           Repo2RepositoryConfig,
-	&RtVirtualRepo:     VirtualRepositoryConfig,
-	&TerraformRepo:     TerraformLocalRepositoryConfig,
+	&DistRepo1:              DistributionRepoConfig1,
+	&DistRepo2:              DistributionRepoConfig2,
+	&GoRepo:                 GoLocalRepositoryConfig,
+	&GoRemoteRepo:           GoRemoteRepositoryConfig,
+	&GoVirtualRepo:          GoVirtualRepositoryConfig,
+	&DockerLocalRepo:             DockerLocalRepositoryConfig,
+	&DockerLocalPromoteRepo: DockerLocalPromoteRepositoryConfig,
+	&DockerRemoteRepo:       DockerRemoteRepositoryConfig,
+	&DockerVirtualRepo:      DockerVirtualRepositoryConfig,
+	&GradleRepo:             GradleRepositoryConfig,
+	&MvnRepo1:               MavenRepositoryConfig1,
+	&MvnRepo2:               MavenRepositoryConfig2,
+	&MvnRemoteRepo:          MavenRemoteRepositoryConfig,
+	&GradleRemoteRepo:       GradleRemoteRepositoryConfig,
+	&NpmRepo:                NpmLocalRepositoryConfig,
+	&NpmRemoteRepo:          NpmRemoteRepositoryConfig,
+	&NugetRemoteRepo:        NugetRemoteRepositoryConfig,
+	&PypiRemoteRepo:         PypiRemoteRepositoryConfig,
+	&PypiVirtualRepo:        PypiVirtualRepositoryConfig,
+	&PipenvRemoteRepo:       PipenvRemoteRepositoryConfig,
+	&PipenvVirtualRepo:      PipenvVirtualRepositoryConfig,
+	&RtDebianRepo:           DebianTestRepositoryConfig,
+	&RtLfsRepo:              GitLfsTestRepositoryConfig,
+	&RtRepo1:                Repo1RepositoryConfig,
+	&RtRepo2:                Repo2RepositoryConfig,
+	&RtVirtualRepo:          VirtualRepositoryConfig,
+	&TerraformRepo:          TerraformLocalRepositoryConfig,
 }
 
 var CreatedNonVirtualRepositories map[*string]string
@@ -371,7 +367,7 @@ func GetNonVirtualRepositories() map[*string]string {
 		TestArtifactory:        {&RtRepo1, &RtRepo2, &RtLfsRepo, &RtDebianRepo, &TerraformRepo},
 		TestArtifactoryProject: {&RtRepo1, &RtRepo2, &RtLfsRepo, &RtDebianRepo},
 		TestDistribution:       {&DistRepo1, &DistRepo2},
-		TestDocker:             {},
+		TestDocker:             {&DockerLocalRepo, &DockerLocalPromoteRepo, &DockerRemoteRepo},
 		TestGo:                 {&GoRepo, &GoRemoteRepo},
 		TestGradle:             {&GradleRepo, &GradleRemoteRepo},
 		TestMaven:              {&MvnRepo1, &MvnRepo2, &MvnRemoteRepo},
@@ -391,7 +387,7 @@ func GetVirtualRepositories() map[*string]string {
 	virtualReposMap := map[*bool][]*string{
 		TestArtifactory:  {&RtVirtualRepo},
 		TestDistribution: {},
-		TestDocker:       {},
+		TestDocker:       {&DockerVirtualRepo},
 		TestGo:           {&GoVirtualRepo},
 		TestGradle:       {},
 		TestMaven:        {},
@@ -450,7 +446,10 @@ func getSubstitutionMap() map[string]string {
 		"${VIRTUAL_REPO}":              RtVirtualRepo,
 		"${LFS_REPO}":                  RtLfsRepo,
 		"${DEBIAN_REPO}":               RtDebianRepo,
-		"${DOCKER_REPO}":               *DockerPromoteLocalRepo,
+		"${DOCKER_REPO}":               DockerLocalRepo,
+		"${DOCKER_PROMOTE_REPO}":       DockerLocalPromoteRepo,
+		"${DOCKER_REMOTE_REPO}":        DockerRemoteRepo,
+		"${DOCKER_VIRTUAL_REPO}":       DockerVirtualRepo,
 		"${DOCKER_IMAGE_NAME}":         DockerImageName,
 		"${DOCKER_REPO_DOMAIN}":        *DockerRepoDomain,
 		"${MAVEN_REPO1}":               MvnRepo1,

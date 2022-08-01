@@ -68,6 +68,10 @@ const (
 	GoLocalRepositoryConfig                = "go_local_repository_config.json"
 	GoRemoteRepositoryConfig               = "go_remote_repository_config.json"
 	GoVirtualRepositoryConfig              = "go_virtual_repository_config.json"
+	DockerLocalRepositoryConfig            = "docker_local_repository_config.json"
+	DockerLocalPromoteRepositoryConfig     = "docker_local_promote_repository_config.json"
+	DockerRemoteRepositoryConfig           = "docker_remote_repository_config.json"
+	DockerVirtualRepositoryConfig          = "docker_virtual_repository_config.json"
 	GradleConfig                           = "gradle.yaml"
 	GradleRemoteRepositoryConfig           = "gradle_remote_repository_config.json"
 	GradleRepositoryConfig                 = "gradle_repository_config.json"
@@ -143,29 +147,33 @@ const (
 
 var (
 	// Repositories
-	DistRepo1         = "cli-dist1"
-	DistRepo2         = "cli-dist2"
-	GoRepo            = "cli-go"
-	GoRemoteRepo      = "cli-go-remote"
-	GoVirtualRepo     = "cli-go-virtual"
-	TerraformRepo     = "cli-terraform"
-	GradleRepo        = "cli-gradle"
-	MvnRemoteRepo     = "cli-mvn-remote"
-	GradleRemoteRepo  = "cli-gradle-remote"
-	MvnRepo1          = "cli-mvn1"
-	MvnRepo2          = "cli-mvn2"
-	NpmRepo           = "cli-npm"
-	NpmRemoteRepo     = "cli-npm-remote"
-	NugetRemoteRepo   = "cli-nuget-remote"
-	PypiRemoteRepo    = "cli-pypi-remote"
-	PypiVirtualRepo   = "cli-pypi-virtual"
-	PipenvRemoteRepo  = "cli-pipenv-pypi-remote"
-	PipenvVirtualRepo = "cli-pipenv-pypi-virtual"
-	RtDebianRepo      = "cli-debian"
-	RtLfsRepo         = "cli-lfs"
-	RtRepo1           = "cli-rt1"
-	RtRepo2           = "cli-rt2"
-	RtVirtualRepo     = "cli-rt-virtual"
+	DistRepo1              = "cli-dist1"
+	DistRepo2              = "cli-dist2"
+	GoRepo                 = "cli-go"
+	GoRemoteRepo           = "cli-go-remote"
+	GoVirtualRepo          = "cli-go-virtual"
+	DockerLocalRepo        = "cli-docker"
+	DockerLocalPromoteRepo = "cli-docker-promote"
+	DockerRemoteRepo       = "cli-docker-remote"
+	DockerVirtualRepo      = "cli-docker-virtual"
+	TerraformRepo          = "cli-terraform"
+	GradleRepo             = "cli-gradle"
+	MvnRemoteRepo          = "cli-mvn-remote"
+	GradleRemoteRepo       = "cli-gradle-remote"
+	MvnRepo1               = "cli-mvn1"
+	MvnRepo2               = "cli-mvn2"
+	NpmRepo                = "cli-npm"
+	NpmRemoteRepo          = "cli-npm-remote"
+	NugetRemoteRepo        = "cli-nuget-remote"
+	PypiRemoteRepo         = "cli-pypi-remote"
+	PypiVirtualRepo        = "cli-pypi-virtual"
+	PipenvRemoteRepo       = "cli-pipenv-pypi-remote"
+	PipenvVirtualRepo      = "cli-pipenv-pypi-virtual"
+	RtDebianRepo           = "cli-debian"
+	RtLfsRepo              = "cli-lfs"
+	RtRepo1                = "cli-rt1"
+	RtRepo2                = "cli-rt2"
+	RtVirtualRepo          = "cli-rt-virtual"
 	// These are not actual repositories. These patterns are meant to be used in both Repo1 and Repo2.
 	RtRepo1And2            = "cli-rt*"
 	RtRepo1And2Placeholder = "cli-rt(*)"
@@ -1575,13 +1583,13 @@ func GetSearchResultAfterDeleteByPropsStep3() []utils.SearchResult {
 
 func GetDockerSourceManifest() []string {
 	return []string{
-		*DockerLocalRepo + "/" + DockerImageName + "/1/manifest.json",
+		*&DockerLocalRepo + "/" + DockerImageName + "/1/manifest.json",
 	}
 }
 
 func GetDockerDeployedManifest() []string {
 	return []string{
-		*DockerPromoteLocalRepo + "/" + DockerImageName + "promotion" + "/2/manifest.json",
+		*&DockerLocalPromoteRepo + "/" + DockerImageName + "promotion" + "/2/manifest.json",
 	}
 }
 
