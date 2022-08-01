@@ -10,7 +10,7 @@ concurrency:
   group: ${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
 jobs:
-  Docker-tests:
+  Do-tests:
     name: docker (ubuntu-latest)
     runs-on: ubuntu-latest
     steps:
