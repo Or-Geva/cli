@@ -216,7 +216,7 @@ func TestRunPushFatManifestImage(t *testing.T) {
 	defer inttestutils.DeleteTestImage(t, builderImageName, container.DockerClient)
 
 	// Run the builder container.
-	runCmd := inttestutils.NewRunDockerImage(container.DockerClient, "-d", "--name", builderContainerName, "--privileged", "-v", workspace+":/workspace", builderImageName)
+	runCmd := inttestutils.NewRunDockerImage(container.DockerClient, "-d", "--name", builderContainerName, "--privileged", "-v", workspace+":/workspace", "--network", "host", builderImageName)
 	assert.NoError(t, gofrogcmd.RunCmd(runCmd))
 	defer inttestutils.DeleteTestcontainer(t, builderContainerName, container.DockerClient)
 
