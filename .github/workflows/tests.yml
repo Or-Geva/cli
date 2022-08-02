@@ -40,11 +40,11 @@ jobs:
 
       - name: Add insecure registry to podman
         run: |
-             cat >> /etc/containers/registries.conf <<EOF /
-            [[registry]] /
-            location = "localhost:8082" /
-            insecure = true /
-            EOF /
+          cat >> /etc/containers/registries.conf <<EOF /
+          [[registry]] /
+          location = "localhost:8082" /
+          insecure = true /
+          EOF /
 
       - name: Run Docker tests
         run: go test -v -timeout 0 --test.docker=true
