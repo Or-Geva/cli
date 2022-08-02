@@ -38,5 +38,12 @@ jobs:
           RTLIC: ${{secrets.RTLIC}}
           GOPROXY: direct
 
+      - name: Log in to local artifactory
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: admin
+          password: password
+          registry: localhost:8082
+
       - name: Run Docker tests
-        run: go test -v -timeout 0 --test.docker=true 
+        run: go test -v -timeout 0 --test.docker=true
