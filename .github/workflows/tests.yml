@@ -39,4 +39,4 @@ jobs:
           GOPROXY: direct
 
       - name: Run Docker tests
-        run: go test -v -timeout 0 --test.docker=true --jfrog.url=${{ secrets.PLATFORM_URL }} --jfrog.adminToken=${{ secrets.PLATFORM_ADMIN_TOKEN }}
+        run: go test -v -timeout 0 --test.docker=true 
