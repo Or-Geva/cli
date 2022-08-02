@@ -52,9 +52,10 @@ func initContainerTest(t *testing.T) []container.ContainerManagerType {
 		t.Skip("Skipping docker/podman test. To run docker test add the '-test.docker=true' option.")
 	}
 	containerManagers := []container.ContainerManagerType{container.DockerClient}
-	if !coreutils.IsWindows() {
-		containerManagers = append(containerManagers, container.Podman)
-	}
+	// TODO: Support private registries with podman tests.
+	// if !coreutils.IsWindows() {
+	// 	containerManagers = append(containerManagers, container.Podman)
+	// }
 	return containerManagers
 }
 
