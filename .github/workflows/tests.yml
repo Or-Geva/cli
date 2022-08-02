@@ -38,12 +38,13 @@ jobs:
           RTLIC: ${{secrets.RTLIC}}
           GOPROXY: direct
 
-      - name: Log in to local artifactory
-        uses: redhat-actions/podman-login@v1
-        with:
-          username: admin
-          password: password
-          registry: localhost:8082
+      - name: Add insecure registry to podman
+        run: |
+             cat >> /etc/containers/registries.conf <<EOF /
+            [[registry]] /
+            location = "localhost:8082" /
+            insecure = true /
+            EOF /
 
       - name: Run Docker tests
         run: go test -v -timeout 0 --test.docker=true
