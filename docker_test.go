@@ -37,7 +37,7 @@ import (
 const (
 	kanikoImage = "gcr.io/kaniko-project/executor:latest"
 	rtContainer = "artifactory:8082"
-	rtNetwork   = "test-network"
+	rtNetwork   = "host"
 )
 
 func InitContainerTests() {
