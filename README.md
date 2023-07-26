@@ -9,7 +9,7 @@
 
 </div>
 
-<details>
+<details> 
   <summary>Tests status</summary>
  
 <table>
