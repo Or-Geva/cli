@@ -22,7 +22,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           id: ${{ github.event.release.id }}
-          body: $(cat ./temp_releaseLinkTemplate.md)
+          body: |
+            $(cat ./temp_releaseLinkTemplate.md)
 
       - name: Cleanup
         run: |
