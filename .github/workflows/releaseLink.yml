@@ -15,6 +15,7 @@ jobs:
         run: |
           x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
           sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md > ./temp_releaseLinkTemplate.md
+          echo $(cat ./temp_releaseLinkTemplate.md)
 
       - name: Edit Release
         uses: irongut/EditRelease@v1.2.0
