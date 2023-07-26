@@ -14,16 +14,15 @@ jobs:
       - name: Replace characters in file
         run: |
           x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
-          sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md > ./temp_releaseLinkTemplate.md
-          echo $(cat ./temp_releaseLinkTemplate.md)
+          y=sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md
+          echo "{links}={y}" >> "$GITHUB_ENV"
 
       - name: Edit Release
         uses: irongut/EditRelease@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           id: ${{ github.event.release.id }}
-          body: |
-            $(cat ./temp_releaseLinkTemplate.md)
+          body: $links
 
       - name: Cleanup
         run: |
