@@ -14,7 +14,7 @@ jobs:
       - name: Replace characters in file
         run: |
           x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
-          y=$(sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md
+          y=$(sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md)
           echo "{links}={y}" >> "$GITHUB_ENV"
 
       - name: Edit Release
