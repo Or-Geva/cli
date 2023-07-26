@@ -23,5 +23,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: "temp_releaseLinkTemplate.md"
+          body_path: "temp_releaseLinkTemplate.md"
           append_body: true
