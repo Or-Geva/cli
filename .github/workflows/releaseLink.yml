@@ -17,7 +17,7 @@ jobs:
           x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
           y=$(sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md)
           echo "$y"
-          echo "release_links_markdown=$y" >> $GITHUB_OUTPUT
+          echo "release_links_markdown="$y"" >> $GITHUB_OUTPUT
 
       - name: validate
         run: echo "${{ steps.vars.outputs.release_links_markdown }}"
