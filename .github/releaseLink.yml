@@ -12,5 +12,6 @@ jobs:
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             id: ${{ github.event.release.id }}
-            name: "Beta"
-            body: "<details>\n<summary>Click me</summary>  ### Heading\n</details>"
+            body: |
+            releaseVersion=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+            $(sed  's/{version}/releaseVersion/g' releaseLinkTemplate.md)
