@@ -23,9 +23,9 @@ jobs:
       - name: validate
         run: echo "${{ steps.create-markdown-text.outputs.MARKDOWN }}"
 
-      # - name: Edit Release
-      #   uses: irongut/EditRelease@v1.2.0
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     id: ${{ github.event.release.id }}
-      #     body: ${{ env.links }}
+      - name: Edit Release
+        uses: irongut/EditRelease@v1.2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          id: ${{ github.event.release.id }}
+          body: ${{ steps.create-markdown-text.outputs.MARKDOWN }}
