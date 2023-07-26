@@ -1,5 +1,6 @@
 name: Add links on release
 on:
+  push:
   release:
     types: [created]
 
@@ -15,16 +16,15 @@ jobs:
         run: |
           x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
           y=$(sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md)
+          echo "$y"
           echo "{links}={y}" >> "$GITHUB_ENV"
 
-      - name: Edit Release
-        uses: irongut/EditRelease@v1.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          id: ${{ github.event.release.id }}
-          body: ${{ env.links }}
+      - name: validate
+        run: echo "$env.links"
 
-      - name: Cleanup
-        run: |
-          # Clean up the temporary file
-          rm ./temp_releaseLinkTemplate.md
+      # - name: Edit Release
+      #   uses: irongut/EditRelease@v1.2.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     id: ${{ github.event.release.id }}
+      #     body: ${{ env.links }}
