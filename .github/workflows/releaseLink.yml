@@ -1,6 +1,5 @@
 name: Add links on release
 on:
-  push:
   release:
     types: [created]
 
@@ -12,18 +11,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Replace characters in file
-        id: create-markdown-text
+      - name: Create markdown download links
         run: |
-          x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
-          sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md > ./temp_releaseLinkTemplate.md
+          # Remove the prefix'v' from version
+          RELEASE_VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
 
-      - name: validate
-        run: echo "${{ steps.create-markdown-text.outputs.MARKDOWN }}"
+          # Replace the place hholders with the actual release version
+          sed "s/{version}/$RELEASE_VERSION/g" ./.github/releaseLinkTemplate.md > ./temp_releaseLinkTemplate.md
 
-      - name: Edit Release
-        uses: irongut/EditRelease@v1.2.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          id: ${{ github.event.release.id }}
-          files: "temp_releaseLinkTemplate.md"
+        - name: Add links to release notes
+          uses: softprops/action-gh-release@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            files: "temp_releaseLinkTemplate.md"
+            append_body: true
