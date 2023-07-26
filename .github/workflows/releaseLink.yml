@@ -1,5 +1,7 @@
 name: Add links on release
-on: [release]
+on:
+    release:
+        types: [created]
 jobs:
     debug:
       name: Debug
