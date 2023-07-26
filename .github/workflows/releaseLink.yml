@@ -13,14 +13,15 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Replace characters in file
+        id: create-markdown-text
         run: |
           x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
           y=$(sed "s/{version}/$x/g" ./.github/releaseLinkTemplate.md)
           echo "$y"
-          echo "release_links_markdown="$y"" >> $GITHUB_OUTPUT
+          echo "MARKDOWN="$y"" >> $GITHUB_OUTPUT
 
       - name: validate
-        run: echo "${{ steps.vars.outputs.release_links_markdown }}"
+        run: echo "${{ steps.create-markdown-text.outputs.MARKDOWN }}"
 
       # - name: Edit Release
       #   uses: irongut/EditRelease@v1.2.0
