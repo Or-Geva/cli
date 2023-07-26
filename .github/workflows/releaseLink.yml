@@ -5,9 +5,10 @@ jobs:
       name: Debug
       runs-on: ubuntu-latest
       steps:
-        - name: Dump env
-          run: env | sort
-        - name: Dump GitHub context
-          env:
-            GITHUB_CONTEXT: ${{ toJson(github) }}
-          run: echo "$GITHUB_CONTEXT"
+        - name: Edit Release
+          uses: irongut/EditRelease@v1.2.0
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            id: ${{ github.event.release.id }}
+            name: "Beta"
+            body: "<details>\n<summary>Click me</summary>  ### Heading\n</details>"
