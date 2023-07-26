@@ -1,18 +1,30 @@
 name: Add links on release
 on:
-    release:
-        types: [created]
+  release:
+    types: [created]
+
 jobs:
-    debug:
-      name: Debug
-      runs-on: ubuntu-latest
-      steps:
-        - name: Replace characters in file
-          run: sed 's/{version}/$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')/g' ./releaseLinkTemplate.md > ./temp_releaseLinkTemplate.md
-        - name: Edit Release
-          uses: irongut/EditRelease@v1.2.0
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            id: ${{ github.event.release.id }}
-            body: |
-             cat ./temp_releaseLinkTemplate.md
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Replace characters in file
+        run: |
+          x=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+          sed "s/{version}/$x/g" ./releaseLinkTemplate.md > ./temp_releaseLinkTemplate.md
+
+      - name: Edit Release
+        uses: irongut/EditRelease@v1.2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          id: ${{ github.event.release.id }}
+          body: |
+            JSON=$(cat ./temp_releaseLinkTemplate.md)
+
+      - name: Cleanup
+        run: |
+          # Clean up the temporary file
+          rm ./temp_releaseLinkTemplate.md
